@@ -484,7 +484,7 @@ bool FHaxeGenerator::generateEnum(const EnumDescriptor *inEnum) {
   }
 
   // comment
-  auto& comment = uenum->GetMetaData(NAME_ToolTip);
+  auto& comment = uenum->GetMetaData(*NAME_ToolTip.ToString());
   if (!comment.IsEmpty()) {
     m_buf << Comment(comment);
   }
@@ -505,8 +505,8 @@ bool FHaxeGenerator::generateEnum(const EnumDescriptor *inEnum) {
   m_buf << Begin(TEXT(" {"));
   for (int i = 0; i < uenum->NumEnums() - 1; i++) {
     auto name = uenum->GetEnumName(i);
-    auto ecomment = uenum->GetMetaData(FName(*(name + TEXT(".") + TEXT("ToolTip"))));
-    auto displayName = uenum->GetMetaData(FName(*(name + TEXT(".") + TEXT("DisplayName"))));
+    auto ecomment = uenum->GetMetaData(*(FName(*(name + TEXT(".") + TEXT("ToolTip")))).ToString());
+    auto displayName = uenum->GetMetaData(*(FName(*(name + TEXT(".") + TEXT("DisplayName")))).ToString());
     if (!displayName.IsEmpty()) {
       if (ecomment.IsEmpty()) {
         ecomment = displayName;
