@@ -175,6 +175,10 @@ FString FHaxeGenerator::getHeaderPath(UPackage *inPack, const FString& inPath) {
   if (index < 0) {
     index = inPath.Find(TEXT("Private"), ESearchCase::IgnoreCase, ESearchDir::FromEnd, startPos);
   }
+  if (index < 0) {
+	  index = startPos;
+  }
+
   if (index >= 0) {
     int len = inPath.Len();
     while (len > ++index && (inPath[index] == TCHAR('/') || inPath[index] == TCHAR('\\'))) {
